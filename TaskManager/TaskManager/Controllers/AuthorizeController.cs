@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TaskManager.Models;
 using TaskManager.Models.DBModel;
+using TaskManager.ViewModels;
 
 namespace TaskManager.Controllers
 {
@@ -19,9 +20,43 @@ namespace TaskManager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Users loginUser)
+        public ActionResult Login(GeneralViewModel loginUser)
         {
-            return View();
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View();
+                }
+                var loggedInUser = dbConnections.Users.FirstOrDefault(f => f.UserName.Equals(loginUser.selectedUsers.UserName) && f.Password.Equals(loginUser.selectedUsers.Password));
+                if (loggedInUser == null)
+                {
+                    ViewBag.loginStatus = "Password or username is incorrect/ Or user not registered";
+                    return View();
+                }
+                
+                var LoggedUserStatus = dbConnections.UserStatus.FirstOrDefault(w => w.Id.Equals(loggedInUser.Id));
+                
+                var LoggedUserTasks = dbConnections.Tasks.Where(w => w.UserId.Equals(loggedInUser.Id));
+                if (LoggedUserTasks.Count() == 0)
+                {
+                    ViewBag.loginStatus = "User have not any tasks";
+
+                }
+                var selectedUser = new GeneralViewModel();
+                selectedUser.selectedUsers = loggedInUser;
+                selectedUser.userStatus = LoggedUserStatus;
+                selectedUser.userTasks = LoggedUserTasks.ToList();
+                Session["loggedUser"] = true;
+                //TODO: check here user is admin or not
+                return View("Admin", "Home", selectedUser);
+            }
+
+            catch(Exception ex)
+            {
+                return View(ex.Message);
+            }
+            
         }
 
         public ActionResult SignUp()

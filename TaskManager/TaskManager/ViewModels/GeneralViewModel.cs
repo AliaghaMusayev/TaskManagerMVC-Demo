@@ -8,7 +8,7 @@ namespace TaskManager.ViewModels
 {
     public class GeneralViewModel
     {
-        public List<Users> selectedUsers { get; set; }
+        public Users selectedUsers { get; set; }
         public UserStatus userStatus { get; set; }
         public List<Tasks> userTasks { get; set; }
 
