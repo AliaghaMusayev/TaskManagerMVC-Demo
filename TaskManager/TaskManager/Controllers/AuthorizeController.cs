@@ -16,6 +16,7 @@ namespace TaskManager.Controllers
         // GET: Authorize
         public ActionResult Login()
         {
+            Session["loggedUser"] = false;
             return View();
         }
 
@@ -31,25 +32,34 @@ namespace TaskManager.Controllers
                 var loggedInUser = dbConnections.Users.FirstOrDefault(f => f.UserName.Equals(loginUser.selectedUsers.UserName) && f.Password.Equals(loginUser.selectedUsers.Password));
                 if (loggedInUser == null)
                 {
-                    ViewBag.loginStatus = "Password or username is incorrect/ Or user not registered";
+                    ViewBag.loginStatus = "Password or username is incorrect / Or user not registered";
                     return View();
                 }
                 
-                var LoggedUserStatus = dbConnections.UserStatus.FirstOrDefault(w => w.Id.Equals(loggedInUser.Id));
+                var LoggedUserStatus = dbConnections.UserStatus.FirstOrDefault(w => w.Id.Equals(loggedInUser.UserStatus));
                 
-                var LoggedUserTasks = dbConnections.Tasks.Where(w => w.UserId.Equals(loggedInUser.Id));
+                var LoggedUserTasks = LoggedUserStatus.Id == (int)Status.User ? dbConnections.Tasks.Where(w => w.UserId.Equals(loggedInUser.Id)) : dbConnections.Tasks;
+
                 if (LoggedUserTasks.Count() == 0)
                 {
                     ViewBag.loginStatus = "User have not any tasks";
 
                 }
-                var selectedUser = new GeneralViewModel();
-                selectedUser.selectedUsers = loggedInUser;
-                selectedUser.userStatus = LoggedUserStatus;
-                selectedUser.userTasks = LoggedUserTasks.ToList();
+
+                List<GeneralViewModel> selectedUser = new List<GeneralViewModel>();
+                selectedUser.Add(new GeneralViewModel() { selectedUsers = loggedInUser,userStatus = LoggedUserStatus, userTasks = LoggedUserTasks});
+
+                TempData["SelectedData"] = selectedUser;
+
                 Session["loggedUser"] = true;
-                //TODO: check here user is admin or not
-                return View("Admin", "Home", selectedUser);
+                
+
+                if (LoggedUserStatus.Id != (int)Status.Admin)
+                {
+                    return RedirectToAction("User", "Home");
+                }
+
+                return RedirectToAction("Admin", "Home");
             }
 
             catch(Exception ex)

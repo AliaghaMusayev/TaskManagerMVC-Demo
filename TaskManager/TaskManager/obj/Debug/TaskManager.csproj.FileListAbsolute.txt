@@ -64,7 +64,6 @@ D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\bin\System.Web.Webpages.D
 D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\bin\System.Web.Webpages.Razor.xml
 D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\bin\System.Web.Helpers.xml
 D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\bin\System.Web.Mvc.xml
-D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\obj\Debug\TaskManager.csprojResolveAssemblyReference.cache
 D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\obj\Debug\TaskManager.csproj.CoreCompileInputs.cache
 D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\obj\Debug\TaskManager.csproj.CopyComplete
 D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\obj\Debug\TaskManager.dll
@@ -75,3 +74,4 @@ D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\bin\EntityFramework.xml
 D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\bin\EntityFramework.SqlServer.xml
 D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\obj\Debug\TaskManager.Migrations.FirstMigr.resources
 D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\obj\Debug\TaskManager.csproj.GenerateResource.cache
+D:\CodeAcademy\MVC\TaskManager\TaskManager\TaskManager\obj\Debug\TaskManager.csprojResolveAssemblyReference.cache

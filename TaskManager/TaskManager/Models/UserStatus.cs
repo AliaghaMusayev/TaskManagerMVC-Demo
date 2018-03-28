@@ -10,4 +10,10 @@ namespace TaskManager.Models
         public int Id { get; set; }
         public string Description { get; set; }
     }
+
+    public enum Status
+    {
+        Admin=1,
+        User=2
+    }
 }

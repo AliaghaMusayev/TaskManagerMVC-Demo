@@ -1,7 +1,92 @@
-﻿
+﻿@model List<TaskManager.ViewModels.GeneralViewModel>
 @{
     ViewBag.Title = "Admin";
 }
 @ViewBag.loginStatus
-<h2>Admin</h2>
 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+</head>
+<body>
+    <label><h2>@ViewBag.userName</h2></label> <br />
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>
+                    TaskId
+                </td>
+
+                <td>
+                    Title
+                </td>
+
+                <td>
+                    User Id
+                </td>
+
+                <td>
+                    Deadline
+                </td>
+
+                <td>
+                    Description
+                </td>
+
+                <td>
+                    Status
+                </td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    foreach (var subItem in item.userTasks)
+                    {
+                        <tr>
+                            <td>
+                                @subItem.Id
+                            </td>
+
+                            <td>
+                                @subItem.Title
+                            </td>
+
+                            <td>
+                                @subItem.UserId
+                            </td>
+
+                            <td>
+                                @subItem.Deadline.ToShortDateString()
+                            </td>
+
+                            <td>
+                                @subItem.Description
+                            </td>
+
+                            <td>
+                                @subItem.Status
+                            </td>
+
+                        </tr>
+                    }
+
+
+                }
+            }
+
+        </tbody>
+    </table>
+
+
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

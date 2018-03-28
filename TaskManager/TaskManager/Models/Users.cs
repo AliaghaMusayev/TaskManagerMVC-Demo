@@ -21,7 +21,7 @@ namespace TaskManager.Models
 
         public string Email { get; set; }
 
-        public byte UserStatus { get; set; }
+        public byte UserStatus { get; set; } = (int)Status.User;
 
         public virtual UserStatus relatedUserStatus { get; set; }
     }

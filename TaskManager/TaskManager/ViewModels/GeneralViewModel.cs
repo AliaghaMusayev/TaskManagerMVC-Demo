@@ -10,8 +10,6 @@ namespace TaskManager.ViewModels
     {
         public Users selectedUsers { get; set; }
         public UserStatus userStatus { get; set; }
-        public List<Tasks> userTasks { get; set; }
-
-        
+        public IQueryable<Tasks> userTasks { get; set; }
     }
 }
