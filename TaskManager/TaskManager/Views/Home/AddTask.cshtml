@@ -1,0 +1,53 @@
+﻿@model TaskManager.Models.Tasks
+@{
+    ViewBag.Title = "AddTask";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Add tasks</title>
+</head>
+<body>
+    <form method="post">
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Title)
+                    @Html.TextBoxFor(m => m.Title)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.UserId)
+                    @Html.TextBoxFor(m => m.UserId, new { type = "number" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Deadline)
+                    @Html.TextBoxFor(m => m.Deadline, new { type = "date" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Description)
+                    @Html.TextBoxFor(m => m.Description)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Status)
+                    @Html.TextBoxFor(m => m.Status)
+                </td>
+            </tr>
+
+        </table>
+
+        <input type="submit" class="btn btn-success" value="Create Task" />
+    </form>
+</body>
+</html>

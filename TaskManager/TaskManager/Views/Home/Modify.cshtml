@@ -1,7 +1,18 @@
-﻿
+﻿@model TaskManager.Models.Tasks
 @{
     ViewBag.Title = "Modify";
 }
 
-<h2>Modify</h2>
-
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Modify Task Status</title>
+</head>
+<body>
+    <form method="post" name="modifyStatusForm">
+       @*<label>Status of issue: </label> <input type="text" class="input-sm"/>*@
+        @Html.LabelFor(m=>m.Status)
+        @Html.TextBoxFor(m=>m.Status)
+        <input type="submit" class="btn btn-success" value="Modify Status" />
+    </form>
+</body>
+</html>
