@@ -9,8 +9,12 @@
     <title></title>
 
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
+
     <label><h2>@ViewBag.userName</h2></label> <br />
     <table class="table table-striped">
         <thead>
@@ -38,18 +42,23 @@
                 <td>
                     Status
                 </td>
+
+                <td>
+                    Modify Status
+                </td>
             </tr>
         </thead>
 
         <tbody>
             @if (Model != null)
             {
+                int counter = 0;
 
                 foreach (var item in Model)
                 {
                     foreach (var subItem in item.userTasks)
                     {
-                        <tr>
+                        <tr class="TaskRow NotRed" id="@counter">
                             <td>
                                 @subItem.Id
                             </td>
@@ -64,6 +73,17 @@
 
                             <td>
                                 @subItem.Deadline.ToShortDateString()
+
+                                @if (subItem.Deadline < DateTime.Now)
+                                {
+                                    
+                                    <script>
+                                    $(document).ready(function () {
+                                        document.getElementsByClassName("TaskRow")[@counter].style.backgroundColor = "red";             
+                                        });
+
+                                    </script>
+                                }
                             </td>
 
                             <td>
@@ -74,8 +94,14 @@
                                 @subItem.Status
                             </td>
 
+                            <td>
+                                @Html.ActionLink("Modify", "Modify", "Home",new { Id=subItem.Id}, new { id=subItem.Id})
+                            </td>
                         </tr>
+
+                        counter++;
                     }
+
 
 
                 }
@@ -84,9 +110,5 @@
         </tbody>
     </table>
 
-
-
-    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

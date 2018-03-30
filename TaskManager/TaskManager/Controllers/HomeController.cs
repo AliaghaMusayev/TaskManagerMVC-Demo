@@ -17,11 +17,30 @@ namespace TaskManager.Controllers
                 return RedirectToAction("Login", "Authorize");
             }
             List<GeneralViewModel> selectedData = TempData["SelectedData"] as List<GeneralViewModel>;
-            ViewBag.userName = selectedData[0].selectedUsers.UserName;
+            if (selectedData != null)
+            {
+                ViewBag.userName = selectedData[0].selectedUsers.UserName;
+            }
+            
             return View(selectedData);
         }
 
         public ActionResult User()
+        {
+            if (Convert.ToBoolean(Session["loggedUser"]) == false)
+            {
+                return RedirectToAction("Login", "Authorize");
+            }
+            List<GeneralViewModel> selectedData = TempData["SelectedData"] as List<GeneralViewModel>;
+            if (selectedData != null)
+            {
+                ViewBag.userName = selectedData[0].selectedUsers.UserName;
+            }
+            return View(selectedData);
+        }
+
+
+        public ActionResult Modify()
         {
             return View();
         }

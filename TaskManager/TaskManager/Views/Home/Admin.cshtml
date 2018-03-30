@@ -9,6 +9,9 @@
     <title></title>
 
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <label><h2>@ViewBag.userName</h2></label> <br />
@@ -43,13 +46,13 @@
 
         <tbody>
             @if (Model != null)
-            {
-
-                foreach (var item in Model)
-                {
-                    foreach (var subItem in item.userTasks)
-                    {
-                        <tr>
+                        {
+                            int counter = 0;
+                            foreach (var item in Model)
+                            {
+                                foreach (var subItem in item.userTasks)
+                                {
+                        <tr class="TaskRow NotRed" id="@counter">
                             <td>
                                 @subItem.Id
                             </td>
@@ -64,6 +67,17 @@
 
                             <td>
                                 @subItem.Deadline.ToShortDateString()
+
+                                @if (subItem.Deadline < DateTime.Now)
+                    {
+
+                            <script>
+                                    $(document).ready(function () {
+                            document.getElementsByClassName("TaskRow")[@counter].style.backgroundColor = "red";
+                        });
+
+                            </script>
+}
                             </td>
 
                             <td>
@@ -75,6 +89,7 @@
                             </td>
 
                         </tr>
+                        counter++;
                     }
 
 
@@ -86,7 +101,5 @@
 
 
 
-    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
